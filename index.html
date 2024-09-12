@@ -24,7 +24,11 @@
 
     <header>
         <div class="container">
-            <img src="https://via.placeholder.com/150x40" alt="Product Logo">
+            <div class="logo">
+                <a href="#about" >
+                    <img src="https://via.placeholder.com/150x40" alt="Product Logo">
+                </a>
+            </div>
             <nav>
                 <ul>
                     <li><a href="#about">About</a></li>
@@ -32,6 +36,10 @@
                     <li><a href="#how-to-order">How to Order</a></li>
                     <li><a href="#about-us">About Us</a></li>
                     <li><a href="#contact-us">Contact Us</a></li>
+                </ul>
+                <ul>
+                    <li><a class="open-modal-btn signin" >Sign In</a></li>
+                    <li><a class="open-modal-btn login" >Login</a></li>
                 </ul>
             </nav>
         </div>
@@ -80,6 +88,17 @@
     <footer>
         <p>&copy; 2024 Amazing Product. All rights reserved.</p>
     </footer>
+
+    <div class="modal" id="my-modal">
+        <div class="modal__box">
+            <button class="modal__close-btn" id="close-my-modal-btn">
+                <img src="img/close.svg" alt="">
+            </button>
+            <iframe src="" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <script defer src="/index.js"></script>
 
 </body>
 </html>
