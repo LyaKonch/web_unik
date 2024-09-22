@@ -45,17 +45,35 @@ let lastScroll = window.scrollY;
 let headerHeight = 80; // Висота заголовка
 
 window.addEventListener("scroll", () => {
-    const currentScrollPosition = window.scrollY;
-    console.log(lastScroll, currentScrollPosition)
-    if (lastScroll < currentScrollPosition) {
-        // Скролл вниз
-        header.style.transform = `translateY(-${currentScrollPosition}px)`;
-    }else {
-        header.style.transform = `translateY(0)`;
-            
-    }
+    if(document.querySelector('.burger').classList.contains('active')){
+        console.log("cacnm")
+    } else {
+        const currentScrollPosition = window.scrollY;
+        if (lastScroll < currentScrollPosition) {
+            // Scrolling down
+            header.style.transform = `translateY(-${Math.min(currentScrollPosition, 80)}px)`;
+        } else {
+            // Scrolling up
+            header.style.transform = `translateY(0)`;
+        }
 
-    lastScroll = currentScrollPosition;
+        lastScroll = currentScrollPosition;
+    }
+});
+
+if(window.innerWidth<768){
+    const navElement = document.querySelector('header nav');
+
+    // Get the nav_container element
+    const navContainer = document.querySelector('.nav-container');
+    // Move the nav element to the nav_container
+    navContainer.appendChild(navElement);
+}
+
+document.querySelector('.burger').addEventListener("click", function() {
+    this.classList.toggle('active');
+    const navElement = document.querySelector(' nav');
+    navElement.classList.toggle('open');
 });
 
 
