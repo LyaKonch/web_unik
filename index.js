@@ -39,3 +39,23 @@ document.getElementById("my-modal").addEventListener('click', event => {
     if (event._isClickWithInModal) return;
     event.currentTarget.classList.remove('open');
 });
+
+const header = document.querySelector("header");
+let lastScroll = window.scrollY;
+let headerHeight = 80; // Висота заголовка
+
+window.addEventListener("scroll", () => {
+    const currentScrollPosition = window.scrollY;
+    console.log(lastScroll, currentScrollPosition)
+    if (lastScroll < currentScrollPosition) {
+        // Скролл вниз
+        header.style.transform = `translateY(-${currentScrollPosition}px)`;
+    }else {
+        header.style.transform = `translateY(0)`;
+            
+    }
+
+    lastScroll = currentScrollPosition;
+});
+
+
