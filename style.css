@@ -472,3 +472,28 @@ footer p {
     from {opacity: 0}
     to {opacity: 1}
 }
+
+/* Trapezoid area */
+
+.error-message {
+    color: red;
+    display: none;
+}
+
+.hidden {
+    display: none;
+}
+
+input.error {
+    border-color: red;
+}
+#trapezoid-form{
+    display:flex;
+    flex-direction: column;;
+    align-items: center;
+    
+}
+
+#trapezoid-form div {
+    margin-bottom: 10px;
+}
