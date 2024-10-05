@@ -139,7 +139,27 @@
             </form>
         </section>
         
+        <h2>Task 1: Search for digits in words</h2>
+        <p id="task1">Hello w0rld, this is a t3st message with s0me digits in w0rds!</p>
+    
+        <h2>Task 2: Search for IP addresses</h2>
+        <p id="task2">Here are some IPs: 192.0.2.1, 10.0.1.15, 256.0.300.999, 172.0.5.123</p>
+    
+        <h2>Task 3: Validate Phone Number</h2>
+        <div class="wrapper">
+            <input type="text" id="phone" placeholder="+xx-xxx-xxx-xx-xx">
+            <button onclick="validatePhone()">Validate</button>
+        </div>
+        
+    
+        <h2>Task 4: Validate Facebook Profile URL</h2>
+        <div class="wrapper">  
+            <input type="text" id="facebookUrl" placeholder="https://facebook.com/yourusername">
+            <button onclick="validateFacebook()">Validate</button>
+        </div>
+        
 
+    
     </main>
 
     <footer>
@@ -155,6 +175,8 @@
         </div>
     </div>
 
+
+    <script src="/validate.js"></script>
     <script defer src="/index.js"></script>
     <script defer src="/trapezoid.js"></script>
 </body>

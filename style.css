@@ -497,3 +497,18 @@ input.error {
 #trapezoid-form div {
     margin-bottom: 10px;
 }
+
+.wrapper {
+    text-align: center;
+}
+input {
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+.valid {
+    border-color: green;
+}
+.invalid {
+    border-color: red;
+}
