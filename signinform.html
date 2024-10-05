@@ -8,6 +8,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+
     <title>Registration Form</title>
     
     <style>
@@ -105,7 +108,7 @@
 <body>
     <div class="container">
         <!-- Registration Form -->
-        <form action="/register" method="post">
+        <form id="registration-form" action="/register" method="post">
             <h3>Register</h3>
             <label for="register-username">Username:</label>
             <input type="text" id="register-username" name="username" required>
@@ -139,5 +142,91 @@
             <input type="reset" value="Clear">
         </form>
     </div>
+    <script>
+
+        $(document).ready(function() {
+            $.validator.addMethod("securePassword", function(value, element) {
+                return this.optional(element) || (
+                    value.length >= 8 && // Мінімальна довжина 8 символів
+                    /[0-9]/.test(value) && // Наявність цифр
+                    /[!@#$%^&*(),.?":{}|<>]/.test(value) // Наявність спеціальних символів
+                );
+            }, "Пароль має містити принаймні 8 символів, одну цифру та один спеціальний символ.");
+            
+            $('#registration-form').validate({
+                rules: {
+                    username: {
+                        required: true,
+                        minlength: 3
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 6,
+                        securePassword: true
+                    },
+                    confirm_password: {
+                        required: true,
+                        equalTo: "#register-password"
+                    },
+                    country: {
+                        required: true
+                    },
+                    birthdate: {
+                        required: true,
+                        date: true // Validate for a date format
+                    }
+                },
+                messages: {
+                    username: {
+                        required: "Please enter a username",
+                        minlength: "Username must be at least 3 characters long"
+                    },
+                    email: "Please enter a valid email address",
+                    password: {
+                        required: "Please provide a password",
+                        minlength: "Password must be at least 6 characters long"
+                    },
+                    confirm_password: {
+                        required: "Please confirm your password",
+                        equalTo: "Passwords do not match"
+                    },
+                    country: {
+                        required: "Please select a country"
+                    },
+                    birthdate: {
+                        required: "Please enter your birthdate",
+                        date: "Please enter a valid date"
+                    }
+                },
+                errorPlacement: function(error, element) {
+                    error.insertAfter(element); // Insert error message after the element
+                    error.hide(); // Hide the error message initially
+                    element.removeClass('valid').addClass('invalid'); // Add invalid class
+
+                    element.on('focus', function() {
+                        error.fadeOut(); // Fade out the error message on focus
+                    });
+                },
+                success: function(label, element) {
+                    $(element).removeClass('invalid').addClass('valid'); // Add valid class
+                    label.fadeIn(); // Fade in the success message
+                },
+                submitHandler: function(form) {
+                    // You can add form submission logic here if needed
+                    $(form).fadeOut("slow", function() {
+                        alert("Form submitted successfully!"); // For demonstration
+                        form.reset(); // Reset the form
+                        $(form).fadeIn(); // Fade in the form again
+                    });
+                }
+            });
+        });
+  
+
+    </script>
 </body>
 </html>

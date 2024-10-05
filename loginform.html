@@ -109,7 +109,7 @@
 <body>
     <div class="container">
         <!-- Login Form -->
-        <form action="/login" method="post">
+        <form id="login-form" action="/login" method="post">
             <h3>Login</h3>
 
             <label for="login-username">Username:</label>
@@ -127,5 +127,36 @@
             <input type="reset" value="Clear">
         </form>
     </div>
+    <script>
+
+        $(document).ready(function() {
+            $('#login-form').validate({
+                rules: {
+                    username: {
+                        required: true,
+                        minlength: 3
+                    },
+                    password: {
+                        required: true,
+                        minlength: 6
+                    }
+                },
+                messages: {
+                    username: {
+                        required: "Please enter your username",
+                        minlength: "Username must be at least 3 characters long"
+                    },
+                    password: {
+                        required: "Please provide your password",
+                        minlength: "Password must be at least 6 characters long"
+                    }
+                },
+                submitHandler: function(form) {
+                    form.submit();
+                }
+            });
+        });
+
+    </script>
 </body>
 </html>
