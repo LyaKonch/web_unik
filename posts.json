@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "title": "Fact 1",
+        "content": "Did you know that honey never spoils?",
+        "imageUrl": "https://theshaykhacademy.com/wp-content/uploads/2024/07/Copy-of-Simple-Did-You-Know-Newsroom-Instagram-Post.png.webp",
+        "likes": 0
+    },
+    {
+        "id": 2,
+        "title": "Tip 1",
+        "content": "Stay hydrated; drinking water can improve your focus.",
+        "imageUrl": "https://www.opalphysio.ca/wp-content/uploads/2022/10/Benefits-Of-Hydration-and-Water-1024x576.jpg",
+        "likes": 0
+    },
+    {
+        "id": 3,
+        "title": "Fact 2",
+        "content": "Bananas are berries, but strawberries are not.",
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQanJvnf4XuanqB_h4O_aTEsD6WXFQVilgcfw&s",
+        "likes": 0
+    }
+]

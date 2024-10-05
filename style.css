@@ -512,3 +512,62 @@ input {
 .invalid {
     border-color: red;
 }
+
+/* posts */
+#posts-section {
+    margin: 20px auto;
+    padding: 15px;
+    max-width: 600px; /* Center the section */
+    background-color: #f9f9f9; /* Light background for contrast */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+}
+
+.post {
+    border-bottom: 1px solid #e0e0e0; /* Subtle separation between posts */
+    padding: 15px 0; /* Vertical padding for posts */
+}
+
+.post:last-child {
+    border-bottom: none; /* Remove border from last post */
+}
+
+#posts-section  h2 {
+    font-size: 24px; /* Title size */
+    text-align: center; /* Center align title */
+    margin-bottom: 20px; /* Space below title */
+}
+
+#posts-section  h3 {
+    font-size: 18px; /* Post title size */
+    margin: 0; /* Remove default margin */
+}
+
+#posts-section  p {
+    font-size: 16px; /* Content size */
+    color: #555; /* Slightly darker text for better readability */
+}
+
+.like-button {
+    background-color: transparent; /* Transparent background */
+    border: none; /* No border */
+    cursor: pointer; /* Pointer cursor */
+    color: #007BFF; /* Blue color for the button */
+    font-size: 14px; /* Button text size */
+    padding: 5px; /* Padding for button */
+    transition: color 0.3s; /* Smooth transition for color change */
+}
+
+.like-button.liked {
+    color: #ff4c4c; /* Red color when liked */
+}
+
+.like-count {
+    margin-left: 5px; /* Space between text and count */
+}
+.post img {
+    object-fit: cover;
+    width: 100%; /* Make images responsive */
+    border-radius: 5px; /* Rounded corners */
+    margin-top: 10px; /* Space above the image */
+}

@@ -76,7 +76,76 @@ document.querySelector('.burger').addEventListener("click", function() {
     navElement.classList.toggle('open');
 });
 
+$(document).ready(function() {
+    loadPosts(); // Load posts on page load
 
+    // Function to load posts from a JSON file or API
+    function loadPosts() {
+        $.ajax({
+            url: 'posts.json', // Path to your JSON file
+            method: 'GET',
+            dataType: 'json',
+            success: function(posts) {
+                displayPosts(posts);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error loading posts:', error);
+            }
+        });
+    }
+
+    // Function to display posts on the page
+    function displayPosts(posts) {
+        const postsContainer = $('#posts-container');
+        postsContainer.empty(); // Clear existing content
+
+        posts.forEach(function(post) {
+            const postElement = $(`
+                <div class="post" id="post-${post.id}">
+                    <h3>${post.title}</h3>
+                    <p>${post.content}</p>
+                     <img src="${post.imageUrl}" alt="${post.title}" style="width:100%; border-radius: 5px; margin-top: 10px;" />
+                    <button class="like-button" id="like-button-${post.id}">
+                        ❤️ Like <span class="like-count">${post.likes || 0}</span>
+                    </button>
+                </div>
+            `);
+            postsContainer.append(postElement);
+        });
+
+        // Attach click event to like buttons
+        $('.like-button').click(function() {
+            const postId = $(this).attr('id').split('-')[2]; // Extract post ID
+            toggleLike(postId);
+        });
+    }
+
+    // Function to toggle like status
+    function toggleLike(postId) {
+        // Simulate like status in localStorage
+        const likes = JSON.parse(localStorage.getItem('likes')) || {};
+        likes[postId] = !likes[postId]; // Toggle like status
+        localStorage.setItem('likes', JSON.stringify(likes));
+
+        // Update the button appearance and like count
+        updateLikeButton(postId, likes[postId]);
+    }
+
+    // Function to update the like button's appearance
+    function updateLikeButton(postId, isLiked) {
+        const likeButton = $(`#like-button-${postId}`);
+        const likeCount = likeButton.find('.like-count');
+
+        // Change button style and update count
+        if (isLiked) {
+            likeButton.addClass('liked');
+            likeCount.text(parseInt(likeCount.text()) + 1); // Increase count
+        } else {
+            likeButton.removeClass('liked');
+            likeCount.text(parseInt(likeCount.text()) - 1); // Decrease count
+        }
+    }
+});
   
 
 
