@@ -76,4 +76,114 @@ document.querySelector('.burger').addEventListener("click", function() {
     navElement.classList.toggle('open');
 });
 
+$(document).ready(function() {
+    $('#login-form').validate({
+        rules: {
+            username: {
+                required: true,
+                minlength: 3
+            },
+            password: {
+                required: true,
+                minlength: 6
+            }
+        },
+        messages: {
+            username: {
+                required: "Please enter your username",
+                minlength: "Username must be at least 3 characters long"
+            },
+            password: {
+                required: "Please provide your password",
+                minlength: "Password must be at least 6 characters long"
+            }
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+});
+
+$(document).ready(function() {
+    $.validator.addMethod("securePassword", function(value, element) {
+        return this.optional(element) || (
+            value.length >= 8 && // Мінімальна довжина 8 символів
+            /[0-9]/.test(value) && // Наявність цифр
+            /[!@#$%^&*(),.?":{}|<>]/.test(value) // Наявність спеціальних символів
+        );
+    }, "Пароль має містити принаймні 8 символів, одну цифру та один спеціальний символ.");
+    
+    $('#registration-form').validate({
+        rules: {
+            username: {
+                required: true,
+                minlength: 3
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            password: {
+                required: true,
+                minlength: 6,
+                securePassword: true
+            },
+            confirm_password: {
+                required: true,
+                equalTo: "#register-password"
+            },
+            country: {
+                required: true
+            },
+            birthdate: {
+                required: true,
+                date: true // Validate for a date format
+            }
+        },
+        messages: {
+            username: {
+                required: "Please enter a username",
+                minlength: "Username must be at least 3 characters long"
+            },
+            email: "Please enter a valid email address",
+            password: {
+                required: "Please provide a password",
+                minlength: "Password must be at least 6 characters long"
+            },
+            confirm_password: {
+                required: "Please confirm your password",
+                equalTo: "Passwords do not match"
+            },
+            country: {
+                required: "Please select a country"
+            },
+            birthdate: {
+                required: "Please enter your birthdate",
+                date: "Please enter a valid date"
+            }
+        },
+        errorPlacement: function(error, element) {
+            error.insertAfter(element); // Insert error message after the element
+            error.hide(); // Hide the error message initially
+            element.removeClass('valid').addClass('invalid'); // Add invalid class
+
+            element.on('focus', function() {
+                error.fadeOut(); // Fade out the error message on focus
+            });
+        },
+        success: function(label, element) {
+            $(element).removeClass('invalid').addClass('valid'); // Add valid class
+            label.fadeIn(); // Fade in the success message
+        },
+        submitHandler: function(form) {
+            // You can add form submission logic here if needed
+            $(form).fadeOut("slow", function() {
+                alert("Form submitted successfully!"); // For demonstration
+                form.reset(); // Reset the form
+                $(form).fadeIn(); // Fade in the form again
+            });
+        }
+    });
+});
+  
 
