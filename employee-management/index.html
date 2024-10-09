@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .form-container {
+            margin-bottom: 20px;
+        }
+        .title{
+            display:flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Employee Management</h1>
+    
+    <div class="form-container">
+        <h2>Add New Employee</h2>
+        <form id="employeeForm">
+            <input type="number" id="empno" placeholder="Employee Number" required>
+            <input type="text" id="ename" placeholder="Employee Name" required>
+            <input type="text" id="job" placeholder="Job Title" required>
+            <input type="number" id="mgr" placeholder="Manager ID">
+            <input type="date" id="hiredate" placeholder="Hire Date" required>
+            <input type="number" id="sal" placeholder="Salary" required>
+            <input type="number" id="comm" placeholder="Commission">
+            <input type="number" id="deptno" placeholder="Department Number" required>
+            <button type="submit">Add Employee</button>
+        </form>
+    </div>
+
+    <div class="title">
+        <h2>Employees List</h2>
+    <input type="text" id="search" placeholder="Search employees..." />
+    </div>
+    <table id="employeesTable">
+        <thead>
+            <tr>
+                <th>Employee Number</th>
+                <th>Name</th>
+                <th>Job</th>
+                <th>Manager ID</th>
+                <th>Hire Date</th>
+                <th>Salary</th>
+                <th>Commission</th>
+                <th>Department Number</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="employeesBody"></tbody>
+    </table>
+
+    <script src="script.js"></script>
+</body>
+</html>
