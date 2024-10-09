@@ -1,77 +1,53 @@
-const http = require('http');
-const fs = require('fs');
+const express = require('express');
+const nodemailer = require('nodemailer');
+const bodyParser = require('body-parser');
 const path = require('path');
+const app = express();
 
+// Middleware for parsing form data
+app.use(bodyParser.urlencoded({ extended: true }));
 
+// Serve static files from the parent directory
+app.use(express.static(path.join(__dirname, '..')));
 
-// Створення HTTP сервера
-const server = http.createServer((req, res) => {
-    res.setHeader('Content-Type', 'text/plain');
-
-    // Обробка URL шляхів
-    if (req.url === '/') {
-        res.statusCode = 200;
-        const filePath = path.join(`../`, 'index.html');
-        
-        // Читаємо файл
-        fs.readFile(filePath, (err, data) => {
-            if (err) {
-                res.writeHead(500, { 'Content-Type': 'text/plain' });
-                res.end('Internal Server Error');
-            } else {
-                res.writeHead(200, { 'Content-Type': 'text/html' });
-                res.end(data); // Відправляємо HTML-сторінку
-            }
-        });
-    } else if (req.url === '/style.css') {
-        const cssPath = path.join( `../`, 'style.css');
-        
-        fs.readFile(cssPath, (err, data) => {
-            if (err) {
-                res.writeHead(404, { 'Content-Type': 'text/plain' });
-                res.end('CSS file not found');
-            } else {
-                res.writeHead(200, { 'Content-Type': 'text/css' });
-                res.end(data); // Send CSS file
-            }
-        });
-    } else if (req.url === '/index.js') {
-        const cssPath = path.join( `../`, 'index.js');
-        
-        fs.readFile(cssPath, (err, data) => {
-            if (err) {
-                res.writeHead(404, { 'Content-Type': 'text/plain' });
-                res.end('Javascript file not found');
-            } else {
-                res.writeHead(200, { 'Content-Type': 'application/javascript' });
-                res.end(data); 
-            }
-        });
-    }else if (req.url === '/about') {
-        res.statusCode = 200;
-        const filePath = path.join(`../`, 'loginform.html');
-        
-        // Читаємо файл
-        fs.readFile(filePath, (err, data) => {
-            if (err) {
-                res.writeHead(500, { 'Content-Type': 'text/plain' });
-                res.end('Internal Server Error');
-            } else {
-                res.writeHead(200, { 'Content-Type': 'text/html' });
-                res.end(data); // Відправляємо HTML-сторінку
-            }
-        });
-        
-    } else if (req.url === '/contact') {
-        res.statusCode = 200;
-        res.end('Contact page');
-    } else {
-        res.statusCode = 404;
-        res.end('Page not found');
-    }
+// Serve the HTML file from the parent directory
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'index.html')); // Absolute path to index.html in the parent directory
 });
 
-// Сервер слухає на порту 3000
-server.listen(3000, () => {
+// Route to handle form submission
+app.post('/send-email', (req, res) => {
+    const { name, email, subject, message } = req.body;
+
+    // Nodemailer configuration
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'analnijmonstr@@gmail.com',
+            pass: '*************'
+        }
+    });
+
+    const mailOptions = {
+        from: email,
+        to: 'y.otrokh@student.sumdu.edu.ua',
+        subject: `Message from ${name}: ${subject}`,
+        text: message
+    };
+
+    // Send the email
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log(error);
+            res.status(500).send('Error sending email');
+        } else {
+            console.log('Email sent: ' + info.response);
+            res.send('Email sent successfully');
+        }
+    });
+});
+
+// Start the server
+app.listen(3000, () => {
     console.log('Server is running on http://localhost:3000');
 });

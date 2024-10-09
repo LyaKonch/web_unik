@@ -231,7 +231,11 @@ article p {
     background-color: #ff1f60;
 }
 
-
+#contact-us{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 #contact-us a {
     color: #f39800;
@@ -570,4 +574,62 @@ input {
     width: 100%; /* Make images responsive */
     border-radius: 5px; /* Rounded corners */
     margin-top: 10px; /* Space above the image */
+}
+
+.feedback-form {
+    /* background-color: #ffffff; */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 50px;
+}
+
+.feedback-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.feedback-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+.feedback-form input, .feedback-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.feedback-form input:focus, .feedback-form textarea:focus {
+    outline: none;
+    border-color: #007BFF;
+}
+
+.feedback-form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.feedback-form button {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.feedback-form button:hover {
+    background-color: #0056b3;
 }
